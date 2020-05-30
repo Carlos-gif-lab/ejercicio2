@@ -1,30 +1,33 @@
-const urljson="./assets/json/chile.json";
-const selectRegion=document.querySelector('#region');
-const selectProvincia=document.querySelector('#provincia');
-const selectComuna=document.querySelector('#comuna');
-const inputNombre=document.querySelector('#nombre');
-const inputApellidoPaterno=document.querySelector('#apellidoPaterno');
-const inputApellidoMaterno=document.querySelector('#apellidoMaterno');
-const inputDireccion=document.querySelector('#direccion');
-const boton=document.querySelector('#agregar');
+const urljson = "./assets/json/chile.json";
+const selectRegion = document.querySelector('#region');
+const selectProvincia = document.querySelector('#provincia');
+const selectComuna = document.querySelector('#comuna');
+const inputNombre = document.querySelector('#nombre');
+const inputApellidoPaterno = document.querySelector('#apellidoPaterno');
+const inputApellidoMaterno = document.querySelector('#apellidoMaterno');
+const inputDireccion = document.querySelector('#direccion');
+const boton = document.querySelector('#agregar');
+
+selectRegion.addEventListener('input', ()=> { 
+  llenaRegion(); 
+}); 
+
+selectRegion.addEventListener('input', ()=> {
+  selectProvincia.innerHTML='<option selected="true" disabled="disabled">::Seleccione Provincia::</option>';
+  llenaProvincia();
+}); 
+
+$(document).ready(function() {
+  llenaRegion();
+});
 
 function llenaRegion() {
   $.getJSON(urljson, function(region) {
-      
       for(let x = 0; x < region.length; x++) {        
         $("#region").append("<option id='" + region[x].region_number + "'>" + region[x].region + "</option>");
       }
   });
- 
 }
-
-$(document).ready(
-  llenaRegion()
-  );
-
-  selectRegion.addEventListener('input',()=>{
-    llenaRegion();
-    }); 
 
 function llenaProvincia() {
     const region_number=selectRegion.options[selectRegion.selectedIndex].id;
@@ -38,10 +41,6 @@ function llenaProvincia() {
                                                  }
                                                                  });}
 
-selectRegion.addEventListener('input',()=>{
-selectProvincia.innerHTML='<option selected="true" disabled="disabled">::Seleccione Provincia::</option>';
-llenaProvincia();
-}); 
 
 function llenaComuna() {
   const region_number=selectRegion.options[selectRegion.selectedIndex].id;
@@ -94,18 +93,30 @@ llenaComuna();
                                   }
                                             
                                                         
-                                    
+function editar(fila) {
+  $("#nombre").val($(fila).find("td").eq(0).html());
+}
+                                  
 function insertar(){
+  
+  $("#insertar").append(`
+    <tr id="datos" onclick="editar(this)">
+      <td id="nombreCol">${inputNombre.value}</td>
+      <td id="apePateCol">${inputApellidoPaterno.value}</td>
+      <td id="apeMateCol">${inputApellidoMaterno.value}</td>
+      <td id="dirCol">${inputDireccion.value}</td>
+      <td id="regionCol">${selectRegion.value}</td>
+      <td id="provinciaCol">${selectProvincia.value}</td>
+      <td id="comunaCol">${selectComuna.value}</td>
+    </tr>`);
 
-  $("#insertar").append(
-    "<tr id=\"datos\"><td id=\"nombreCol\">" + inputNombre.value + "</td>"+ 
-    "<td id=\"apePateCol\">" + inputApellidoPaterno.value + "</td>"+ 
-    "<td id=\"apeMateCol\">" + inputApellidoMaterno.value + "</td>"+
-    "<td id=\"dirCol\">" + inputDireccion.value + "</td>"+
-    "<td id=\"regionCol\">" + selectRegion.value + "</td>"+
-    "<td id=\"provinciaCol\">" + selectProvincia.value + "</td>"+ 
-    "<td id=\"comunaCol\">" + selectComuna.value + "</td></tr>");
-                    }
+    /*
+    $("#insertar").find("tr").click(function() {
+      alert($(this).find("td").eq(0).html());
+    });
+    */
+
+}
 
 boton.addEventListener('click',()=>{
   i=0;

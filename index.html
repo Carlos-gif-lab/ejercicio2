@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Ejercico</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body>
+<div class="container"> 
+    <div class="container1">
+
+        <table>
+            <tr><th class="th1" id="nombreCol">Nombre</th><td class="td1"><input type="text" id="nombre"></td></tr>
+            <tr><th class="th1" id="apepaCol">Apellido Paterno</th><td class="td1"><input type="text" id="apellidoPaterno"></td></tr>
+            <tr><th class="th1" id="apemaCol">Apellido Materno</th><td class="td1"><input type="text" id="apellidoMaterno"></td></tr>
+            <tr><th class="th1" id="direccionCol">Dirección</th><td class="td1"><input type="text" id="direccion"></td></tr>
+            <tr><th class="th1" id="regionCol"> Región</th><td class="td1"><select name="region" id="region"><option selected="true" disabled="disabled">::Seleccione Región::</option></select></td></tr>
+            <tr><th class="th1" id="provinciaCol">Provincia</th><td class="td1"><select name="provincia" id="provincia"><option selected="true" disabled="disabled">::Seleccione Provincia::</option></select></td></tr>
+            <tr><th class="th1" id="comunaCol">Comuna</th><td class="td1"><select name="comuna" id="comuna"><option selected="true" disabled="disabled">::Seleccione comuna::</option></select></td></tr>
+            <tr><th>    </th><td>   <td></tr>
+            <tr><th></th><td><button id="eliminar">Eliminar</button><button id="agregar">Agregar</button></td></tr>
+        </table><br>
+    
+        
+    
+    </div>
+    <div class="container2">
+
+    <table>
+
+<thead><tr><th class="th2">Nombre</th>
+           <th class="th2">Apellido Paterno</th>
+           <th class="th2">Apellido Materno</th>
+           <th class="th2">Dirección</th>
+           <th class="th2">Región</th>
+           <th class="th2">Provincia</th>
+           <th class="th2">Comuna</th>
+        </tr>
+</thead>
+
+<tbody id="insertar">
+    <tr id="datos"><td id="nombreCol2">1</td>
+    <td id="apePateCol2">2</td>
+    <td id="apeMateCol2">3</td>
+    <td id="dirCol2">4</td>
+    <td id="regionCol2">5</td>
+    <td id="provinciaCol2">6</td>
+    <td id="comunaCol2">7</td></tr>
+
+    <tr id="datos"><td id="nombreCol2">8</td>
+        <td id="apePateCol2">9</td>
+        <td id="apeMateCol2">10</td>
+        <td id="dirCol2">11</td>
+        <td id="regionCol2">12</td>
+        <td id="provinciaCol2">13</td>
+        <td id="comunaCol2">14</td></tr>
+</tbody>
+
+    </table>
+    </div>
+    
+</div>
+
+
+
+    <script src="assets/js/index.js"></script>
+</body>
+</html>

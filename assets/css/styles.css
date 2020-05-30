@@ -39,6 +39,15 @@
         background-color: #dfdfff;
     }
 
+    tbody tr td {
+        cursor: pointer;
+    }
+
+    tbody tr:hover td {
+        background-color: black;
+        color: white;
+    }
+
     input{
         border: 0;
         background-color: transparent;

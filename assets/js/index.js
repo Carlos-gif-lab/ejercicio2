@@ -23,23 +23,31 @@ $(document).ready(function() {
                              });
 
 selectRegion.addEventListener('input', ()=> {
-  selectProvincia.innerHTML='<option selected="true" disabled="disabled">::Seleccione Provincia::</option>';
-  selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
-  llenaProvincia();
+
+  //selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
+  if((persona_reg.status.indexOf(2)==-1)){ 
+    $(`#provincia`).empty();
+     llenaProvincia();}else{llenaProvincia()}
+
 }); 
 
 selectProvincia.addEventListener('input',()=>{
-  selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
-  llenaComuna();
+  //selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
+ if ((persona_reg.status.indexOf(2)==-1)){ 
+    $(`#comuna`).empty();
+    llenaComuna();}else{llenaComuna()}
+  
                                            }); 
 
-function llenaRegion() {
-  $.getJSON(urljson, function(region) {
-      for(let x = 0; x < region.length; x++) {        
-        $("#region").append("<option id='" + region[x].region_number + "'>" + region[x].region + "</option>");
-      }
-  });
+/*selectComuna.addEventListener('input',()=>{
+ //selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
+ if(!(persona_reg.status.indexOf(2)==-1)){
+     
+  
 }
+                                          }); */
+
+
 
 botonAgregar.addEventListener('click',()=>{
   let i=0;
@@ -72,6 +80,14 @@ botonEliminar.addEventListener('click',()=>{
   }
 
 });
+
+function llenaRegion() {
+  $.getJSON(urljson, function(region) {
+      for(let x = 0; x < region.length; x++) {        
+        $("#region").append("<option id='" + region[x].region_number + "'>" + region[x].region + "</option>");
+      }
+  });
+}
 
 function llenaProvincia() {
     const region_number=selectRegion.options[selectRegion.selectedIndex].id;
@@ -126,9 +142,10 @@ function llenaComuna() {
             inputApellidoPaterno.value='';
             inputApellidoMaterno.value='';
             inputDireccion.value='';            
-            selectRegion.value='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
-            selectProvincia.value='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
-            selectComuna.value='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
+            selectRegion.innerHTML='<option selected="true" disabled="disabled">::Seleccione Región::</option>';
+            selectProvincia.innerHTML='<option selected="true" disabled="disabled">::Seleccione Provincia::</option>';
+            selectComuna.innerHTML='<option selected="true" disabled="disabled">::Seleccione comuna::</option>';
+            llenaRegion();           
             
             inputNombre.focus();
                                   }
@@ -140,11 +157,12 @@ function editar(fila) {
   $("#apellidoPaterno").val($(fila).find("td").eq(1).html());
   $("#apellidoMaterno").val($(fila).find("td").eq(2).html());
   $("#direccion").val($(fila).find("td").eq(3).html());
-  $("#region").val($(fila).find("td").eq(4).html());
+  /*$("#region").val($(fila).find("td").eq(4).html());
   $("#provincia").val($(fila).find("td").eq(5).html());
-  $("#comuna").val($(fila).find("td").eq(6).html());
+  $("#comuna").val($(fila).find("td").eq(6).html());*/
 
-  console.log(document.querySelector("#comuna").innerHTML);
+  
+     
 
 for (let index = 0; index < persona_reg.status.length; index++) {
   
@@ -155,6 +173,13 @@ for (let index = 0; index < persona_reg.status.length; index++) {
 
 const localizacion=persona_reg.id_reg.indexOf(fila.className);
 persona_reg.status[localizacion]=2;
+
+selectRegion.innerHTML =`<option selected="true">${persona_reg.region_reg[localizacion]}</option>`;
+llenaRegion();
+selectProvincia.innerHTML =`<option selected="true">${persona_reg.provincia_reg[localizacion]}</option>`;
+llenaProvincia();
+selectComuna.innerHTML =`<option selected="true">${persona_reg.comuna_reg[localizacion]}</option>`;
+llenaComuna();
   
 }
                                   
